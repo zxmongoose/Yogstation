@@ -55,7 +55,6 @@
 	var/exp_type_department = ""
 
 	//The amount of good boy points playing this role will earn you towards a higher chance to roll antagonist next round
-	//can be overridden by antag_rep.txt config
 	var/antag_rep = 10
 
 	var/paycheck = PAYCHECK_MINIMAL
@@ -67,12 +66,12 @@
 
 	var/list/changed_maps = list() // Maps on which the job is changed. Should use the same name as the mapping config
 
-/* 
+/*
 	If you want to change a job on a specific map with this system, you will want to go onto that job datum
 	and add said map's name to the changed_maps list, like so:
-	
+
 	changed_maps = list("OmegaStation")
-	
+
 	Then, you're going to want to make a proc called "OmegaStationChanges" on the job, which will be the one
 	actually making the changes, like so:
 
@@ -84,7 +83,7 @@
 
 	/datum/job/warden
 		changed_maps = list("OmegaStation")
-	
+
 	/datum/job/warden/proc/OmegaStationChanges()
 		total_positions = 2
 		spawn_positions = 2
@@ -115,11 +114,6 @@
 //Used for a special check of whether to allow a client to latejoin as this job.
 /datum/job/proc/special_check_latejoin(client/C)
 	return TRUE
-
-/datum/job/proc/GetAntagRep()
-	. = CONFIG_GET(keyed_list/antag_rep)[lowertext(title)]
-	if(. == null)
-		return antag_rep
 
 //Don't override this unless the job transforms into a non-human (Silicons do this for example)
 /datum/job/proc/equip(mob/living/carbon/human/H, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, datum/outfit/outfit_override = null, client/preference_source)

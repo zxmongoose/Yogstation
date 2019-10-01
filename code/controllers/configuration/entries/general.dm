@@ -175,8 +175,6 @@
 
 /datum/config_entry/flag/guest_jobban
 
-/datum/config_entry/flag/usewhitelist
-
 /datum/config_entry/flag/use_age_restriction_for_jobs	//Do jobs use account age restrictions? --requires database
 
 /datum/config_entry/flag/use_account_age_for_jobs	//Uses the time they made the account for the job restriction stuff. New player joining alerts should be unaffected.
@@ -354,10 +352,6 @@
 
 /datum/config_entry/flag/autoconvert_notes	//if all connecting player's notes should attempt to be converted to the database
 	protection = CONFIG_ENTRY_LOCKED
-
-/datum/config_entry/flag/allow_webclient
-
-/datum/config_entry/flag/webclient_only_byond_members
 
 /datum/config_entry/flag/announce_admin_logout
 

@@ -351,14 +351,9 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			to_chat(src, "Visit <a href=\"https://secure.byond.com/download\">BYOND's website</a> to get the latest version of BYOND.")
 
 	if (connection == "web" && !connecting_admin)
-		if (!CONFIG_GET(flag/allow_webclient))
-			to_chat(src, "Web client is disabled")
-			qdel(src)
-			return 0
-		if (CONFIG_GET(flag/webclient_only_byond_members) && !IsByondMember())
-			to_chat(src, "Sorry, but the web client is restricted to byond members only.")
-			qdel(src)
-			return 0
+		to_chat(src, "Web client is disabled")
+		qdel(src)
+		return 0
 
 	if( (world.address == address || !address) && !GLOB.host )
 		GLOB.host = key

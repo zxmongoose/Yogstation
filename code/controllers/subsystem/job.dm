@@ -455,7 +455,7 @@ SUBSYSTEM_DEF(job)
 			else
 				M = H
 
-		SSpersistence.antag_rep_change[M.client.ckey] += job.GetAntagRep()
+		SSpersistence.antag_rep_change[M.client.ckey] += job.antag_rep
 
 		if(M.client.holder)
 			if(CONFIG_GET(flag/auto_deadmin_players) || (M.client.prefs?.toggles & DEADMIN_ALWAYS))
