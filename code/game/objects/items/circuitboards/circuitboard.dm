@@ -1,3 +1,4 @@
+GLOBAL_LIST_EMPTY(tracked_boards)
 //File with the circuitboard and circuitboard/machine class definitions and procs
 
 
@@ -14,6 +15,12 @@
 	w_class = WEIGHT_CLASS_SMALL
 	grind_results = list(/datum/reagent/silicon = 20)
 	var/build_path = null
+	var/tracked = FALSE
+
+/obj/item/circuitboard/Initialize()
+	.=..()
+	if(tracked)
+		GLOB.tracked_boards += src
 
 /obj/item/circuitboard/proc/apply_default_parts(obj/machinery/M)
 	return

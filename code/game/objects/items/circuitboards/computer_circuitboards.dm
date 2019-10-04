@@ -4,11 +4,19 @@
 	name = "AI Upload (Computer Board)"
 	icon_state = "command"
 	build_path = /obj/machinery/computer/upload/ai
+	tracked = TRUE
 
 /obj/item/circuitboard/computer/borgupload
 	name = "Cyborg Upload (Computer Board)"
 	icon_state = "command"
 	build_path = /obj/machinery/computer/upload/borg
+
+/obj/item/circuitboard/computer/communications
+	name = "Communications (Computer Board)"
+	icon_state = "command"
+	build_path = /obj/machinery/computer/communications
+	tracked = TRUE
+	var/lastTimeUsed = 0
 
 /obj/item/circuitboard/computer/bsa_control
 	name = "Bluespace Artillery Controls (Computer Board)"
@@ -18,6 +26,7 @@
 	name = "ID Console (Computer Board)"
 	icon_state = "command"
 	build_path = /obj/machinery/computer/card
+	tracked = TRUE
 
 /obj/item/circuitboard/computer/card/centcom
 	name = "CentCom ID Console (Computer Board)"
@@ -118,12 +127,6 @@
 	name = "Telecommunications Server Monitor (Computer Board)"
 	icon_state = "engineering"
 	build_path = /obj/machinery/computer/telecomms/server
-
-/obj/item/circuitboard/computer/communications
-	name = "Communications (Computer Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/computer/communications
-	var/lastTimeUsed = 0
 
 /obj/item/circuitboard/computer/message_monitor
 	name = "Message Monitor (Computer Board)"
