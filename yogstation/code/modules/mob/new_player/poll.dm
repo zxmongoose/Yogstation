@@ -164,6 +164,54 @@
 				<td style='border:1px solid #888888'>[replytext]</td>
 			</tr>"}
 		output += "</table>"
+	
+	if(polltype == POLLTYPE_IRV)
+		select_query = SSdbcore.NewQuery("SELECT ckey AS ckey FROM [format_table_name("poll_vote")] WHERE pollid = '[pollid]' GROUP BY ckey")
+		select_query.Execute()
+		output += {"
+		<table width='900' align='center' bgcolor='#eeffee' cellspacing='0' cellpadding='4'>
+		<tr bgcolor='#ddffdd'>
+			<th colspan='2' align='center'>[question]<br><font size='1'><b>[starttime] - [endtime]</b></font></th>
+		</tr>"}
+		var/list/votes = list()
+		while(select_query.NextRow())
+			var/responder = select_query.item[1]
+			votes[responder] = list()
+		
+		for(var/voter in votes)
+			select_query = SSdbcore.NewQuery("SELECT optionid FROM [format_table_name("poll_vote")] WHERE pollid = [pollid] AND ckey = [voter]")
+			var/i = 1
+			while(select_query.NextRow())
+				var/vote = select_query.item[1]
+				votes[voter][i] = vote
+		
+		var/list/results = list()
+		var/j = votes[1].len
+		for(var/i in 1 to j)
+			var/list/votes2 = votes.Copy()
+			if(results.len)
+				for(var/k in results)
+					for(var/l in votes2)
+						votes2[l] -= k
+			var/list/amountOfVotes = list()
+			for(var/k in votes2[1])
+				amountOfVotes[k] = 0
+			for(var/k in votes2)
+				amountOfVotes[votes[k][1]] += 1
+			for(var/k in votes2[1])
+				if(!amountOfVotes[k]) //Remove anyone who didn't get a vote
+					for(var/l in votes)
+						votes[l] -= k
+						continue
+			var/lowestVote = 0
+			for(var/k in amountOfVotes)
+				if(amountOfVotes[k] > (votes.len/2)) //if you have more than 50% of the vote, you automatically win
+					results += k
+					break
+				
+			
+
+
 	output += "</body></html>"
 
 	src << browse(output,"window=pollresults;size=950x500")
